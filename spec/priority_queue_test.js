@@ -1,5 +1,5 @@
 describe("PriorityQueue", function() {
-    var PriorityQueue = require('../../lib/priority_queue');
+    var PriorityQueue = require('../lib/priority_queue');
 
     beforeEach(function() {
       priorityQueue = new PriorityQueue();
