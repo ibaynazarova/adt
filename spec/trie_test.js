@@ -43,4 +43,48 @@ describe("Trie", function() {
         expect(trie.getCount('application')).toEqual(1);
         expect(trie.getCount('nonexistingword')).toEqual(0);
     });
+
+    it('should delete word but keep prefix', () => {
+        let trie = new Trie();
+
+        trie.insert('a');
+        trie.insert('a1');
+
+        trie.delete('a1');
+
+        expect(trie.searchWord('a')).toBeTrue();
+        expect(trie.searchWord('a1')).toBeFalse();
+    });
+
+    it('should delete prefix', () => {
+        let trie = new Trie();
+        trie.insert('a');
+        trie.insert('a1');
+
+        trie.delete('a');
+
+        expect(trie.searchWord('a')).toBeFalse();
+        expect(trie.searchWord('a1')).toBeTrue();
+    });
+
+    it('should delete word', () => {
+        let trie = new Trie();
+        trie.insert('abc123');
+        trie.insert('abc456');
+
+        trie.delete('abc456');
+
+        expect(trie.searchWord('abc456')).toBeFalse();
+        expect(trie.searchWord('abc123')).toBeTrue();
+    });
+
+
+    it('should not delete word', () => {
+        let trie = new Trie();
+        trie.insert('abc123');
+
+        trie.delete('abc456');
+
+        expect(trie.delete('abc456')).toBeFalse();
+    });
 });
